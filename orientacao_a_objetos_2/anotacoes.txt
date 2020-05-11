@@ -33,3 +33,12 @@ As classes ABC contém modelos de classes já implementadas que podem ser úteis
 
 Exemplo de classe abstrata em classes_abstratas
 Exemplo de criação de ABC em criacao_abc
+
+Na herança múltipla, o python pode se deparar com a situação de ter 2 superclasses que contém o mesmo método, para isso, ele executa o algoritmo MRO
+que define qual método será executado.
+
+Funcionamento do MRO:
+1 Primeiro busca o método na classe
+2 Depois, busca na primeira superclasse da esquerda para a direita
+3 Em seguida, busca na superclasse da superclasse, até acabar a hierarquia
+4 Depois, busca na próxima superclasse herdada, repetindo os passos 3 e 4.

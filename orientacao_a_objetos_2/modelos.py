@@ -32,22 +32,6 @@ class Filme(Programa):
         return f'Nome: {self.nome} - {self.duracao} min - Likes: {self.likes}'
 
 
-class Playlist:
-    def __init__(self, nome, programas):
-        self.nome = nome
-        self.programas = programas
-
-    def __getitem__(self, item):
-        return programas[item]
-
-    @property
-    def listagem(self):
-        return self.programas
-
-    def __len__(self):
-        return len(self.programas)
-
-
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
         super().__init__(nome, ano)
@@ -57,19 +41,37 @@ class Serie(Programa):
         return f'Nome: {self.nome} - {self.temporadas} temporadas - Likes: {self.likes}'
 
 
+class Playlist():
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+
+    def __getitem__(self, item):
+        return self._programas[item]
+
+    def __len__(self):
+        return len(self._programas)
+
+
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 atlanta = Serie('atlanta', 2018, 2)
-vingadores.dar_likes()
-vingadores.dar_likes()
-vingadores.dar_likes()
+tmep = Filme('todo mundo em panico', 1999, 100)
+demolidor = Serie('demolidor', 2016, 2)
 
+vingadores.dar_likes()
+vingadores.dar_likes()
+vingadores.dar_likes()
 atlanta.dar_likes()
 atlanta.dar_likes()
+tmep.dar_likes()
+tmep.dar_likes()
+demolidor.dar_likes()
+demolidor.dar_likes()
 
-programas = [vingadores, atlanta, atlanta]
-playlist = Playlist('Playlist de Fim de semana', programas)
+listinha = [atlanta, vingadores, demolidor, tmep]
+minha_playlist = Playlist('fim de semana', listinha)
 
-for programa in playlist:
+for programa in minha_playlist:
     print(programa)
 
-print(len(playlist))
+print(f'Tamanho: {len(minha_playlist.listagem)}')
