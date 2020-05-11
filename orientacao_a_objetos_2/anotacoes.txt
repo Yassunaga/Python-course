@@ -1,0 +1,26 @@
+Duck typing:
+“If it looks like a duck and quacks like a duck, it’s a duck”
+Duck typing é usado em linguagens dinâmicas onde o tipo ou a classe de um objeto é menos importante do que o que a define.
+Não é necessário ter uma classe inteira com todos os métodos necessários para um lista se comportar como tal, por exemplo.
+Utilizando alterando somente o comportamento dessa classe em aspectos específicos, podemos obter o mesmo resultado sem herdar todos os métodos e atributos da lista.
+Em duck typing, não é necessário ser de um tipo para se comportar como tal.
+
+Python data model:
+Para alterar o comportamento dos objetos em python, é necessário alterar seu protocolo utilizando métodos mágicos:
+Inicialização: __init__ Ex: obj = Novo()
+Representação: __str__, __repr__, ex: print(obj), str(obj), repr(obj)
+Container, sequencia: __contains__, __iter__, __len__, __getitem__, ex: len(obj), item in obj, for i in obj, obj[2:3]
+Numéricos: __add__, __sub__, __mul__, __mod__, ex: obj + outro_obj, obj * obj
+
+Interface em java:
+Ideia de contrato de implementação de métodos
+
+Interface em python:
+Ideia de protocolo, o objeto precisa se comportar de uma forma, para isso, é necessário implementar métodos que comportem um protocolo específico
+Exemplo: Protocolo de sequência
+
+Extensão:
+Uma classe, também é uma superclasse, sendo uma extensão desta superclasse
+
+Composição:
+Na composição, a classe somente se comporta como outra classe em outros aspectos

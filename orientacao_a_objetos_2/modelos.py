@@ -44,8 +44,8 @@ class Playlist:
     def listagem(self):
         return self.programas
 
-    def tamanho(self):
-        return len(programas)
+    def __len__(self):
+        return len(self.programas)
 
 
 class Serie(Programa):
@@ -71,3 +71,5 @@ playlist = Playlist('Playlist de Fim de semana', programas)
 
 for programa in playlist:
     print(programa)
+
+print(len(playlist))
