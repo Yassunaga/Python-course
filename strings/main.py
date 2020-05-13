@@ -1,2 +1,5 @@
-argumento = "https://www.bytebank.com. br/cambio?1500moedaorigem=real&moedadestino=dolar&valor=1500"
+argumento = "https://www.bytebank.com.br/cambio?moedaorigem=real"
 
+
+index = argumento.find("=")
+print(argumento[index+1:])
