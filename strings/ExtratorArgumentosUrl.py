@@ -17,13 +17,16 @@ class ExtratorArgumentosUrl:
 
     def extrai_argumentos(self):
         """O método find, recebe como segundo argumento, o ponto de partida da busca"""
-        indice_inicial_moeda_origem = self.url.find("=") + 1
-        indice_final_moeda_origem = self.url.find("&")
+        busca_moeda_origem = "moedaorigem"
+        busca_moeda_destino = "moedadestino"
+        inicio_moeda_origem = self.encontra_indice_inicial(busca_moeda_origem)
+        fim_moeda_origem = self.url.find("moedadestino") - 1
+        inicio_moeda_destino = self.encontra_indice_inicial(busca_moeda_destino)
+        fim_moeda_destino = self.url.find("&", self.url.find("moedadestino"))
 
-        indice_inicial_moeda_destino = self.url.find("=", 15) + 1
-        indice_final_moeda_destino = self.url.find("&", self.url.find("&")+1)
-
-        moeda_origem = self.url[indice_inicial_moeda_origem:indice_final_moeda_origem]
-        moeda_destino = self.url[indice_inicial_moeda_destino:indice_final_moeda_destino]
-
+        moeda_origem = self.url[inicio_moeda_origem:fim_moeda_origem]
+        moeda_destino = self.url[inicio_moeda_destino:fim_moeda_destino]
         return moeda_origem, moeda_destino
+
+    def encontra_indice_inicial(self, moeda_buscada):
+        return self.url.find(moeda_buscada) + len(moeda_buscada) + 1
