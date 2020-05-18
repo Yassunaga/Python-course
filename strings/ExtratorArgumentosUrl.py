@@ -17,16 +17,26 @@ class ExtratorArgumentosUrl:
 
     def extrai_argumentos(self):
         """O método find, recebe como segundo argumento, o ponto de partida da busca"""
-        busca_moeda_origem = "moedaorigem"
-        busca_moeda_destino = "moedadestino"
-        inicio_moeda_origem = self.encontra_indice_inicial(busca_moeda_origem)
-        fim_moeda_origem = self.url.find("moedadestino") - 1
-        inicio_moeda_destino = self.encontra_indice_inicial(busca_moeda_destino)
-        fim_moeda_destino = self.url.find("&", self.url.find("moedadestino"))
+        busca_moeda_origem = "moedaorigem="
+        busca_moeda_destino = "moedadestino="
 
+        inicio_moeda_origem = self.encontra_indice_inicial(busca_moeda_origem)
+        fim_moeda_origem = self.url.find("&")
         moeda_origem = self.url[inicio_moeda_origem:fim_moeda_origem]
-        moeda_destino = self.url[inicio_moeda_destino:fim_moeda_destino]
+
+        if moeda_origem == "moedadestino":
+            self.troca_moeda_origem()
+            inicio_moeda_origem = self.encontra_indice_inicial(busca_moeda_origem)
+            fim_moeda_origem = self.url.find("&")
+            moeda_origem = self.url[inicio_moeda_origem:fim_moeda_origem]
+
+        inicio_moeda_destino = self.encontra_indice_inicial(busca_moeda_destino)
+        moeda_destino = self.url[inicio_moeda_destino:]
         return moeda_origem, moeda_destino
 
     def encontra_indice_inicial(self, moeda_buscada):
-        return self.url.find(moeda_buscada) + len(moeda_buscada) + 1
+        return self.url.find(moeda_buscada) + len(moeda_buscada)
+
+    def troca_moeda_origem(self):
+        self.url = self.url.replace("moedadestino", "real", 1)
+        print(self.url)
