@@ -1,7 +1,7 @@
 class ExtratorArgumentosUrl:
-    def __init__(self, url):
+    def __init__(self, url: str):
         if self.is_url_valida(url):
-            self.url = url
+            self.url = url.lower()
         else:
             raise LookupError("Url inválida!!!")
 
@@ -31,7 +31,9 @@ class ExtratorArgumentosUrl:
             moeda_origem = self.url[inicio_moeda_origem:fim_moeda_origem]
 
         inicio_moeda_destino = self.encontra_indice_inicial(busca_moeda_destino)
-        moeda_destino = self.url[inicio_moeda_destino:]
+        fim_moeda_destino = self.url.find("&valor")
+
+        moeda_destino = self.url[inicio_moeda_destino:fim_moeda_destino]
         return moeda_origem, moeda_destino
 
     def encontra_indice_inicial(self, moeda_buscada):
@@ -40,3 +42,9 @@ class ExtratorArgumentosUrl:
     def troca_moeda_origem(self):
         self.url = self.url.replace("moedadestino", "real", 1)
         print(self.url)
+
+    def extrai_valor(self):
+        busca_valor = "valor="
+        indice_inicial_valor = self.encontra_indice_inicial(busca_valor)
+
+        return self.url[indice_inicial_valor:]
