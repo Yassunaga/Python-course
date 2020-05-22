@@ -1,4 +1,6 @@
 class ExtratorArgumentosUrl:
+    URL_BYTE_BANK = "https://bytebank.com"
+
     def __init__(self, url: str):
         if self.is_url_valida(url):
             self.url = url.lower()
@@ -8,9 +10,8 @@ class ExtratorArgumentosUrl:
     def __str__(self):
         return self.url
 
-    @staticmethod
-    def is_url_valida(url):
-        if url:
+    def is_url_valida(self, url):
+        if url and url.startswith(self.URL_BYTE_BANK):
             return True
         else:
             return False
