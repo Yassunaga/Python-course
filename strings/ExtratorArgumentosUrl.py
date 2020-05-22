@@ -8,7 +8,17 @@ class ExtratorArgumentosUrl:
             raise LookupError("Url inválida!!!")
 
     def __str__(self):
-        return self.url
+        valor = self.extrai_valor()
+        moeda_origem, moeda_destino = self.extrai_argumentos()
+        return "Valor: {} \nMoeda origem: {}\nMoeda destino: {}\n".format(valor, moeda_origem, moeda_destino)
+
+    def __len__(self):
+        return len(self.url)
+
+    def __eq__(self, other):
+        if isinstance(other, ExtratorArgumentosUrl):
+            return self.url == other.url
+        return False
 
     def is_url_valida(self, url):
         if url and url.startswith(self.URL_BYTE_BANK):
@@ -42,7 +52,6 @@ class ExtratorArgumentosUrl:
 
     def troca_moeda_origem(self):
         self.url = self.url.replace("moedadestino", "real", 1)
-        print(self.url)
 
     def extrai_valor(self):
         busca_valor = "valor="
