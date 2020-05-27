@@ -18,7 +18,7 @@ lista = [jogo1, jogo2, jogo3]
 
 
 @app.route("/")
-def ola():
+def index():
     return render_template('index.html', titulo='Jogos',
                            jogos=lista)
 
@@ -38,4 +38,6 @@ def criar():
     return render_template("index.html", titulo='Jogos', jogos=lista)
 
 
-app.run(host="0.0.0.0", port="5000")
+app.run(host="0.0.0.0",
+        port="5000",
+        debug=True)
