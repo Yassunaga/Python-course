@@ -16,6 +16,24 @@ class Jogo:
         return f"{self.nome}, {self.console}, {self.categoria}"
 
 
+class Usuario:
+
+    def __init__(self, id, nome, senha):
+        self.nome = nome
+        self.id = id
+        self.senha = senha
+
+
+usuario1 = Usuario('gabriel', 'Gabriel', "1234")
+usuario2 = Usuario('bueno', 'Bueno', '1456')
+usuario3 = Usuario('flavio', 'Flavio', 'javascript')
+
+usuarios = {
+    usuario1.id: usuario1,
+    usuario2.id: usuario2,
+    usuario3.id: usuario3
+}
+
 jogo1 = Jogo("Mario", "Plataforma", "SNES")
 jogo2 = Jogo("Mortal Kombat", "Luta", "SNES")
 jogo3 = Jogo("Rayman", "Plataforma", "Xbox")
@@ -56,8 +74,8 @@ def autenticar():
     usuario = request.form['usuario']
     senha = request.form['senha']
 
-    if senha == 'mestra':
-        session['usuario_logado'] = usuario
+    if usuario in usuarios.keys() and usuarios[usuario].senha == senha:
+        session['usuario_logado'] = usuarios[usuario].id
         flash(f"Usuário {usuario} logado com sucesso!")
         proxima = request.form['proxima']
         return redirect(proxima)
