@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session, flash, url_for
 from loguru import logger
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def index():
 @app.route('/novo')
 def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] is None:
-        return redirect("/login?proxima=novo")
+        return redirect(url_for("login", proxima=url_for("novo")))
     logger.info("CADASTRANDO NOVO JOGO")
     return render_template('novo.html')
 
@@ -48,7 +48,7 @@ def criar():
     logger.info("CADASTRANDO NOVO JOGO")
     logger.info(f"{nome}")
 
-    return redirect("/")
+    return redirect(url_for('index'))
 
 
 @app.route("/autenticar", methods=['POST'])
@@ -60,10 +60,10 @@ def autenticar():
         session['usuario_logado'] = usuario
         flash(f"Usuário {usuario} logado com sucesso!")
         proxima = request.form['proxima']
-        return redirect("/{}".format(proxima))
+        return redirect(proxima)
     else:
         flash("Usuário ou senha incorretos!")
-        return redirect("/login")
+        return redirect(url_for('login'))
 
 
 @app.route('/login')
@@ -78,7 +78,7 @@ def logout():
 
     flash("Nenhuma usuário logado")
 
-    return redirect("/")
+    return redirect(url_for('index'))
 
 
 app.run(host="0.0.0.0", port=5000, debug=True)
