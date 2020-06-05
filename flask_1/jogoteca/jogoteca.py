@@ -1,22 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
+from .models.models import Jogo, Usuario
 
 app = Flask(__name__)
 app.secret_key = 'alura'
-
-
-class Jogo:
-    def __init__(self, nome, categoria, console):
-        self.nome = nome
-        self.categoria = categoria
-        self.console = console
-
-
-class Usuario:
-    def __init__(self, id, nome, senha):
-        self.id = id
-        self.nome = nome
-        self.senha = senha
-
 
 usuario1 = Usuario('luan', 'Luan Marques', '1234')
 usuario2 = Usuario('Nico', 'Nico Steppat', '7a1')
