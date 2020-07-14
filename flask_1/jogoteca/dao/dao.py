@@ -1,4 +1,4 @@
-from ..models.models import Jogo, Usuario
+from models.models import Jogo, Usuario
 
 SQL_CRIA_JOGO = 'INSERT INTO jogo (nome, categoria, console) VALUES (%s, %s, %s)'
 SQL_ATUALIZA_JOGO = 'UPDATE jogo SET nome=%s, categoria=%s, console=%s where id = %s'
