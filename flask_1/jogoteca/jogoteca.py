@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
-from models.models import Jogo, Usuario
-from dao.dao import JogoDao, UsuarioDao
 from flask_mysqldb import MySQL
-import os
+
+from dao.dao import JogoDao, UsuarioDao
+from models.models import Jogo
 
 app = Flask(__name__)
 app.secret_key = 'alura'
@@ -65,6 +65,36 @@ def autenticar():
 def logout():
     session['usuario_logado'] = None
     flash('Nenhum usuário logado!')
+    return redirect(url_for('index'))
+
+
+@app.route('/editar/<int:id>')
+def editar(id):
+    if 'usuario_logado' not in session or session['usuario_logado'] is None:
+        return redirect(url_for('login', proxima=url_for('editar')))
+    jogo_buscado = jogo_dao.busca_por_id(id)
+    return render_template('editar.html', titulo='Editando jogo', jogo=jogo_buscado)
+
+
+@app.route('/atualizar/<int:id>', methods=['POST'])
+def atualizar(id):
+
+    jogo_buscado = jogo_dao.busca_por_id(id)
+    jogo_buscado.nome = request.form['nome']
+    print(request.form['nome'])
+
+    jogo_buscado.categoria = request.form['categoria']
+    print(request.form['categoria'])
+
+    jogo_buscado.console = request.form['console']
+    print(request.form['console'])
+
+    print(jogo_buscado.nome)
+    print(jogo_buscado.categoria)
+    print(jogo_buscado.console)
+    print(jogo_buscado.id)
+    jogo_dao.salvar(jogo_buscado)
+
     return redirect(url_for('index'))
 
 

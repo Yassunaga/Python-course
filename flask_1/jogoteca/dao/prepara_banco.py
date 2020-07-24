@@ -1,4 +1,5 @@
 import MySQLdb
+
 print('Conectando...')
 conn = MySQLdb.connect(user='yassunaga', passwd='92875087', host='127.0.0.1', port=3306)
 
@@ -28,12 +29,12 @@ conn.cursor().execute(criar_tabelas)
 # inserindo usuarios
 cursor = conn.cursor()
 cursor.executemany(
-      'INSERT INTO jogoteca.usuario (id, nome, senha) VALUES (%s, %s, %s)',
-      [
-            ('luan', 'Luan Marques', 'flask'),
-            ('nico', 'Nico', '7a1'),
-            ('danilo', 'Danilo', 'vegas')
-      ])
+    'INSERT INTO jogoteca.usuario (id, nome, senha) VALUES (%s, %s, %s)',
+    [
+        ('luan', 'Luan Marques', 'flask'),
+        ('nico', 'Nico', '7a1'),
+        ('danilo', 'Danilo', 'vegas')
+    ])
 
 cursor.execute('SELECT * FROM jogoteca.usuario')
 print(' -------------  Usuários:  -------------')
@@ -42,15 +43,15 @@ for user in cursor.fetchall():
 
 # inserindo jogos
 cursor.executemany(
-      'INSERT INTO jogoteca.jogo (nome, categoria, console) VALUES (%s, %s, %s)',
-      [
-            ('God of War 4', 'Acao', 'PS4'),
-            ('NBA 2k18', 'Esporte', 'Xbox One'),
-            ('Rayman Legends', 'Indie', 'PS4'),
-            ('Super Mario RPG', 'RPG', 'SNES'),
-            ('Super Mario Kart', 'Corrida', 'SNES'),
-            ('Fire Emblem Echoes', 'Estrategia', '3DS'),
-      ])
+    'INSERT INTO jogoteca.jogo (nome, categoria, console) VALUES (%s, %s, %s)',
+    [
+        ('God of War 4', 'Acao', 'PS4'),
+        ('NBA 2k18', 'Esporte', 'Xbox One'),
+        ('Rayman Legends', 'Indie', 'PS4'),
+        ('Super Mario RPG', 'RPG', 'SNES'),
+        ('Super Mario Kart', 'Corrida', 'SNES'),
+        ('Fire Emblem Echoes', 'Estrategia', '3DS'),
+    ])
 
 cursor.execute('select * from jogoteca.jogo')
 print(' -------------  Jogos:  -------------')

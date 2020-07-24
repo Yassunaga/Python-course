@@ -1,21 +1,31 @@
 {% extends "template.html" %}
 {% block conteudo %}
+
+    <style>
+        .table-row {
+            cursor: pointer;
+        }
+    </style>
     <table class="table table-striped table-responsive table-bordered">
         <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Console</th>
-            </tr>
+        <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Console</th>
+            <th>Editar</th>
+        </tr>
         </thead>
         <tbody>
         {% for jogo in jogos %}
-                        <tr>
-                            <td>{{ jogo.nome }}</td>
-                            <td>{{ jogo.categoria }}</td>
-                            <td>{{ jogo.console }}</td>
-                        </tr>
+
+            <tr class='table-row' type="submit">
+                <td>{{ jogo.nome }}</td>
+                <td>{{ jogo.categoria }}</td>
+                <td>{{ jogo.console }}</td>
+                <td><a href="{{ url_for('editar', id=jogo.id) }}"> Editar </a></td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
+
 {% endblock %}
